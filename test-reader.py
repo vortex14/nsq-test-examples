@@ -11,7 +11,7 @@ def message_handler(message: nsq.Message):
     message.finish()
 
 
-async def push_to_nsq():
+async def reader_from__nsq():
 
     reader = nsq.Reader(
             topic="nsq-test-writer", channel="test-ch", message_handler=message_handler,
@@ -25,5 +25,5 @@ if __name__ == "__main__":
 
     loop = asyncio.get_event_loop()
     AsyncIOMainLoop().install()
-    loop.create_task(push_to_nsq())
+    loop.create_task(reader_from__nsq())
     loop.run_forever()
